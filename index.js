@@ -62,6 +62,13 @@ app.get('/user',async(req,res)=>{
     res.send(user)
 })
 
+// app.post('/services', async(req,res)=>{
+//     const service = await req.body;
+//     console.log("service", service);
+ 
+//     const resultAll = await  serviceCollection.insertOne(service)
+//     res.json({data: resultAll, status: 200, message: "Service added successfully"});
+//  })
 
 app.post('/bookings', async(req,res)=>{
     const booking =req.body
@@ -84,14 +91,14 @@ app.post('/users',async(req,res)=>{
     res.send(result)
 })
 
-app.get('/user',async(req,res)=>{
+app.get('/users',async(req,res)=>{
     const email = req.query.email;
     const query ={email:email};
     const user = await usersCollection.findOne(query);
     res.send(user)
 })
 
-app.get('/users',async (req,res)=>{
+app.get('/user',async (req,res)=>{
     const query ={}
     const cursor = usersCollection.find(query);
     const services = await cursor.toArray();
@@ -104,6 +111,7 @@ app.get('/users',async (req,res)=>{
       res.send(result);
 
     })
+
 
 
 
