@@ -38,12 +38,28 @@ const category = await cursor.toArray();
 res.send(category)
 })
 
-app.get('/services/:id',async(req,res)=>{
-    const id =req.params.id;
-    const query ={category_id:(id)};
-    const cursor =await serviceCollection.find(query);
-    const category = await cursor.toArray();
-    res.send(category)
+// app.get('/services/:id',async(req,res)=>{
+//     const id =req.query.category;
+//     const query ={category_id:(id)};
+//     const cursor =await serviceCollection.find(query);
+//     const category = await cursor.toArray();
+//     res.send(category)
+// })
+
+
+
+app.get('/services/by/category',async(req,res)=>{
+    const category = req.query.category;
+    const query ={category:category};
+   
+    const services =await serviceCollection.find(query).toArray();
+    res.send(services)
+})
+app.get('/user',async(req,res)=>{
+    const email = req.query.email;
+    const query ={email:email};
+    const user = await usersCollection.findOne(query);
+    res.send(user)
 })
 
 
@@ -68,13 +84,14 @@ app.post('/users',async(req,res)=>{
     res.send(result)
 })
 
-// app.get('/user',async(req,res)=>{
-//     const email = req.query.email;
-//     const query ={email:email};
-//     const user = await usersCollection.findOne(query);
-//     res.send(user)
-// })
-app.get('/user',async (req,res)=>{
+app.get('/user',async(req,res)=>{
+    const email = req.query.email;
+    const query ={email:email};
+    const user = await usersCollection.findOne(query);
+    res.send(user)
+})
+
+app.get('/users',async (req,res)=>{
     const query ={}
     const cursor = usersCollection.find(query);
     const services = await cursor.toArray();
